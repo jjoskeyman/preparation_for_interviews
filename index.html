@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" href="css/styles.css" rel="stylesheet" />
+    <script src="js/database.js"></script>
+    <script src="js/scripts.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="rubrics-menu">
+            <div class="title" id="category-title">
+                Категории
+                <div id="questions-count" title="общее количество вопросов"></div>
+                <img id="microphone" src="./img/microphone.png" alt="microphone" onclick="startRecognition()">
+            </div>
+            <div class="main-title main" onclick="getLayout('main')">Главная</div>
+            <div class="main-title work" onclick="getLayout('work')"><div class="counter"></div>О работе</div>
+            <div class="main-title other" onclick="getLayout('other')"><div class="counter"></div>Общее</div>
+            <div class="main-title python" onclick="getLayout('python')"><div class="counter"></div>Python</div>
+            <div class="main-title databases" onclick="getLayout('databases')"><div class="counter"></div>Базы данных, SQL</div>
+            <div class="main-title oop" onclick="getLayout('oop')"><div class="counter"></div>ООП</div>
+            <div class="main-title async" onclick="getLayout('async')"><div class="counter"></div>Асинхронность</div>
+            <div class="main-title review" onclick="getLayout('review')"><div class="counter"></div>Code Review</div>
+            <div class="main-title tests" onclick="getLayout('tests')"><div class="counter"></div>Тестирование</div>
+            <div class="main-title django" onclick="getLayout('django')"><div class="counter"></div>Django</div>
+            <div class="main-title git" onclick="getLayout('git')"><div class="counter"></div>Git</div>
+            <div class="main-title docker" onclick="getLayout('docker')"><div class="counter"></div>Docker</div>
+            <div class="main-title algorithms" onclick="getLayout('algorithms')"><div class="counter"></div>Алгоритмы</div>
+            <div class="main-title linux" onclick="getLayout('linux')"><div class="counter"></div>Linux</div>
+            <div class="main-title drf" onclick="getLayout('drf')"><div class="counter"></div>DRF</div>
+            <div class="main-title brokers" onclick="getLayout('brokers')"><div class="counter"></div>Брокеры сообщений</div>
+        </div>
+        <div class="content-box">
+            <div class="questions-menu">
+                <div class="title">Каталог вопросов</div>
+                <div class="questions-container"></div>
+            </div>
+            <div class="answer-and-question">
+                <div class="title">Вопрос</div>
+                <div class="question"></div>
+                <div class="title">Ответ</div>
+                <div class="answer"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        if (screen.width <= 767) { // если ширина экрана меньше 767 пикселей
+          window.location = "/backend/mobile-index.html"; // перенаправляем пользователя на мобильную версию сайта
+        }
+
+        var category = sessionStorage.getItem("category");
+
+        if (!category || category == 'main') {
+            // делаем категорию визуально выбранной
+            document.getElementsByClassName('main')[0].classList.add('select');
+
+            // удаляем контейнер для вопросов/ответов
+            document.getElementsByClassName('content-box')[0].remove();
+
+            // добавляем контент главной страницы
+            document.getElementsByClassName('main-container')[0].innerHTML += `<div class="main-page-content">${mainText}</div>`;
+        } else {
+            // заполняем список вопросов
+            getQuestionsList(category);
+
+            // делаем категорию визуально выбранной
+            document.getElementsByClassName(category)[0].classList.add('select');
+
+            // прописываем стиль последнему вопросу в списке
+            var questions = document.getElementsByClassName('question-in-menu');
+            var lastQuestion = questions[questions.length - 1];
+            lastQuestion.classList.add("last-question");
+
+            // заполняем первый вопрос и ответ
+            getAnswer(category, 1);
+        }
+        // заполняем счётчики количества вопросов в каждой категории + общий счётчик
+        fillCounters();
+
+        // ГОЛОСОВЫЕ КОМАНДЫ
+        const speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new speechRecognition() // Создание объекта распознавания речи
+        recognition.lang = "ru-RU"; // Установка языка распознавания
+        recognition.interimResults = false; // Устанавливаем, чтобы результаты отображались только после завершения записи речи
+        recognition.maxAlternatives = 1; // Устанавливаем максимальное число альтернатив распознавания
+
+        // Обработчик события, вызываемый после завершения распознавания речи
+        recognition.onresult = function(event) {
+          const result = event.results[0][0].transcript; // Получаем распознанный текст
+
+          runCommand(result);
+          console.log(result); // Выводим распознанный текст в консоль
+        };
+
+        // Обработчик события, вызываемый при ошибке распознавания речи
+        recognition.onerror = function(event) {
+          alert(event.error); // Выводим ошибку в консоль
+        };
+
+        // Функция, которая запускает процесс распознавания речи
+        function startRecognition() {
+          recognition.start(); // Запуск распознавания речи
+          event.stopPropagation();
+        }
+    </script>
+</body>
+</html>
