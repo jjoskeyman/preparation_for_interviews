@@ -23,13 +23,13 @@ a {
     overflow: auto;
     border: 2px solid red;
     padding: 10px;
-    font-size: 2vw;
+    font-size: 1vw;
     margin-left: 10px;
 }
 
 .questions-menu {
     width: 25vw;
-    max-height: 86.7vh;
+    max-height: 90vh;
 }
 
 .questions-container {
@@ -39,7 +39,7 @@ a {
 }
 
 .answer-and-question {
-    width: 46vw;
+    width: 56vw;
     height: 88.7vh;
     margin-left: 1.3vw;
 }
@@ -54,20 +54,20 @@ a {
 
 .question {
     margin-bottom: 3vh;
-    height: 12vh;
+    height: 5vh;
     overflow: auto;
-    font-size: 1.4vw;
+    font-size: 24px;
 }
 
 .answer {
     max-height: 58.7vh;
-    font-size: 1.4vw;
+    font-size: 24px;
 }
 
 .main-title {
     position: relative;
-    font-size: 2.5vh;
-    width: 90%;
+    font-size: 2vh;
+    width: 40%;
     border: 2px solid red;
     margin: 5px;
     padding: 8px;
@@ -95,7 +95,7 @@ a {
 }
 
 .title {
-    font-size: 2.5vw;
+    font-size: 24px;
     text-decoration: underline;
     margin-bottom: 20px;
     margin-left: 10px;
@@ -116,7 +116,7 @@ a {
 }
 
 .question-in-menu {
-    font-size: 1.4vw;
+    font-size: 24px;
     padding: 10px;
     border: 1px solid white;
     /*margin-bottom: 10px;*/
