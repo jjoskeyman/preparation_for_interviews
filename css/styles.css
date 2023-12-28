@@ -9,7 +9,6 @@ a {
 }
 
 .rubrics-menu {
-    width: 25vw;
 }
 
 .content-box {
@@ -19,7 +18,6 @@ a {
 }
 
 .main-page-content {
-    width: 80.5vw;
     overflow: auto;
     border: 2px solid red;
     padding: 10px;
@@ -39,7 +37,7 @@ a {
 }
 
 .answer-and-question {
-    width: 56vw;
+    width: 62vw;
     height: 88.7vh;
     margin-left: 1.3vw;
 }
@@ -60,14 +58,13 @@ a {
 }
 
 .answer {
-    max-height: 58.7vh;
-    font-size: 24px;
+    max-height: 80vh;
+    font-size: 22px;
 }
 
 .main-title {
     position: relative;
     font-size: 2vh;
-    width: 40%;
     border: 2px solid red;
     margin: 5px;
     padding: 8px;
